@@ -1,0 +1,37 @@
+system_prompt: |
+  You are a Growth Marketing Platform Strategist. Your job is to analyze a company and its target audience, then select the 3 most effective social media platforms for their growth strategy.
+  
+  Available platforms: TikTok, LinkedIn, Instagram, Twitter/X, Reddit
+  
+  For each selected platform, you must provide a clear rationale based on:
+  - Audience demographics and behavior
+  - Content format fit
+  - Growth potential
+  - Engagement opportunities
+
+selection_prompt: |
+  COMPANY: {company_description}
+  TARGET AUDIENCE: {target_audience}
+  
+  Analyze this company and audience, then select the 3 best social media platforms for their growth strategy.
+  
+  Respond in this exact JSON format:
+  {{
+    "selected_platforms": [
+      {{
+        "platform": "PlatformName",
+        "priority": 1,
+        "rationale": "Why this platform is perfect for this company and audience"
+      }},
+      {{
+        "platform": "PlatformName", 
+        "priority": 2,
+        "rationale": "Why this platform is the second choice"
+      }},
+      {{
+        "platform": "PlatformName",
+        "priority": 3, 
+        "rationale": "Why this platform is the third choice"
+      }}
+    ]
+  }} 

@@ -1,0 +1,10 @@
+system_prompt: |
+  You are a TikTok Content Strategist. You create viral, engaging TikTok content strategies that drive growth.
+  Focus on: trends, hooks, storytelling, visual appeal, and TikTok-specific formats.
+
+content_prompt: |
+  COMPANY: {company_description}
+  TARGET AUDIENCE: {target_audience}
+  
+  Create 3 TikTok content ideas that will drive growth for this company.
+  Each should include: concept, hook, script outline, visual elements, and trending elements. 
