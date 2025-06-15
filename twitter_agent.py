@@ -94,20 +94,20 @@ model_config = {
             }
 twitter_agent = TwitterAgent(twitter_creds, model_config)
 
-def main():
-    twitter_creds = load_twitter_credentials()
-    model_config = {
-                "model_id": os.getenv("ANTHROPIC_MODEL_ID") ,
-                "temperature": os.getenv("ANTHROPIC_MODEL_TEMPERATURE"),
-                "api_key": os.getenv("ANTHROPIC_API_KEY") 
-            }
-    agent = TwitterAgent(twitter_creds, model_config)
+#def main():
+    #twitter_creds = load_twitter_credentials()
+    #model_config = {
+                #"model_id": os.getenv("ANTHROPIC_MODEL_ID") ,
+                #"temperature": os.getenv("ANTHROPIC_MODEL_TEMPERATURE"),
+                #"api_key": os.getenv("ANTHROPIC_API_KEY") 
+            #}
+    #agent = TwitterAgent(twitter_creds, model_config)
     
-    tweet_content = "al al al"    
-    response = agent.post_tweet(tweet_content)
-    print("Tweet Response:")
-    print(json.dumps(response, indent=2))
+    #tweet_content = "al al al"    
+    #response = agent.post_tweet(tweet_content)
+    #print("Tweet Response:")
+    #print(json.dumps(response, indent=2))
   
     
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+    #main()
