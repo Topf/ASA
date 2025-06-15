@@ -9,6 +9,7 @@ from functools import wraps
 import logging
 import os
 from dotenv import load_dotenv
+from config import REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USER_AGENT, REDDIT_USERNAME, REDDIT_PASSWORD, CLAUDE_API_KEY
 
 # Third-party imports
 import backoff
@@ -77,11 +78,11 @@ def publish_post(title: str, content: str, subreddit: str,
 
         # Initialisation de l'API Reddit
         reddit = praw.Reddit(
-            client_id=os.getenv("REDDIT_CLIENT_ID"),
-            client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
-            user_agent=os.getenv("REDDIT_USER_AGENT"),
-            username=os.getenv("REDDIT_USERNAME"),
-            password=os.getenv("REDDIT_PASSWORD")
+            client_id=REDDIT_CLIENT_ID,
+            client_secret=REDDIT_CLIENT_SECRET,
+            user_agent=REDDIT_USER_AGENT,
+            username=REDDIT_USERNAME,
+            password=REDDIT_PASSWORD
         )
 
         sub = reddit.subreddit(subreddit)
@@ -116,11 +117,11 @@ def analyze_subreddit(subreddit: str) -> str:
             raise ValueError("Le nom du subreddit est requis")
 
         reddit = praw.Reddit(
-            client_id=os.getenv("REDDIT_CLIENT_ID"),
-            client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
-            user_agent=os.getenv("REDDIT_USER_AGENT"),
-            username=os.getenv("REDDIT_USERNAME"),
-            password=os.getenv("REDDIT_PASSWORD")
+            client_id=REDDIT_CLIENT_ID,
+            client_secret=REDDIT_CLIENT_SECRET,
+            user_agent=REDDIT_USER_AGENT,
+            username=REDDIT_USERNAME,
+            password=REDDIT_PASSWORD
         )
             
         sub = reddit.subreddit(subreddit)
@@ -189,11 +190,11 @@ def comment_on_post(post_url: str, comment_text: str,
             raise ValueError("Impossible d'extraire l'ID du post depuis l'URL")
         
         reddit = praw.Reddit(
-            client_id=os.getenv("REDDIT_CLIENT_ID"),
-            client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
-            user_agent=os.getenv("REDDIT_USER_AGENT"),
-            username=os.getenv("REDDIT_USERNAME"),
-            password=os.getenv("REDDIT_PASSWORD")
+            client_id=REDDIT_CLIENT_ID,
+            client_secret=REDDIT_CLIENT_SECRET,
+            user_agent=REDDIT_USER_AGENT,
+            username=REDDIT_USERNAME,
+            password=REDDIT_PASSWORD
         )
         
         # Récupérer le post
@@ -234,7 +235,7 @@ if __name__ == "__main__":
         tools=[publish_post, analyze_subreddit, comment_on_post, DuckDuckGoSearchTool()],
         model=LiteLLMModel(
             model_id="claude-3-5-sonnet-20241022",
-            api_key=os.getenv("CLAUDE_API_KEY")
+            api_key=CLAUDE_API_KEY
         ),
         name="RedditContentAgent",
         description="Un agent qui crée et publie du contenu optimisé sur Reddit"
