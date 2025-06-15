@@ -9,7 +9,7 @@ from functools import wraps
 import logging
 import os
 from dotenv import load_dotenv
-from config import REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USER_AGENT, REDDIT_USERNAME, REDDIT_PASSWORD, CLAUDE_API_KEY
+from config import REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USER_AGENT, REDDIT_USERNAME, REDDIT_PASSWORD, ANTHROPIC_API_KEY
 
 # Third-party imports
 import backoff
@@ -229,31 +229,16 @@ def _extract_submission_id(url: str) -> Optional[str]:
     
     return None
 
-if __name__ == "__main__":
-    # Initialiser l'agent avec les outils
-    agent = CodeAgent(
+# Initialiser l'agent avec les outils
+reddit_agent = CodeAgent(
         tools=[publish_post, analyze_subreddit, comment_on_post, DuckDuckGoSearchTool()],
         model=LiteLLMModel(
             model_id="claude-3-5-sonnet-20241022",
-            api_key=CLAUDE_API_KEY
+            api_key=ANTHROPIC_API_KEY
         ),
         name="RedditContentAgent",
         description="Un agent qui crée et publie du contenu optimisé sur Reddit"
     )
-
-    # Exemple d'utilisation
-    try:
-        # Analyse d'un subreddit
-        subreddit = "hackathon_HF"
-        logger.info(f"Analyse du subreddit r/{subreddit}...")
-        analysis = agent.run(f"Analyse le subreddit r/{subreddit} et ses tendances")
-        logger.info(f"Analyse: {analysis}")
-
-        # Création et publication d'un post
-        suggestion = "les agents IA dans l'immobilier"
-        logger.info("Création et publication du post...")
-        result = agent.run(f"Crée et publie un post sur r/{subreddit} à propos de : {suggestion}")
-        logger.info(f"Résultat: {result}")
 
     except Exception as e:
         logger.error(f"Erreur lors de l'exécution: {str(e)}")
