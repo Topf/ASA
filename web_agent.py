@@ -86,8 +86,17 @@ def profiler(company_description: str) -> str:
     )
     return response.content[0].text
 
+web_agent = CodeAgent(tools=[describe_company_from_url, profiler], 
+                      model=LiteLLMModel(
+                          model_id="anthropic/claude-3-5-sonnet-latest",
+                          api_key=ANTHROPIC_API_KEY,
+                      ),
+                      name="URLDescriptionAgent",
+                      description="An agent that gives you the ideal customer profile from website URLs"
+                      )
+
 if __name__ == "__main__":
-    agent = CodeAgent(tools=[describe_company_from_url, profiler], 
+    web_agent = CodeAgent(tools=[describe_company_from_url, profiler], 
                       model=LiteLLMModel(
                           model_id="anthropic/claude-3-5-sonnet-latest",
                           api_key=ANTHROPIC_API_KEY,
@@ -97,4 +106,4 @@ if __name__ == "__main__":
                       )
     url = "https://corolair.com/"
 
-    agent.run(url)
+    web_agent.run(url)

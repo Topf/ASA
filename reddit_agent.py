@@ -239,7 +239,3 @@ reddit_agent = CodeAgent(
         name="RedditContentAgent",
         description="Un agent qui crée et publie du contenu optimisé sur Reddit"
     )
-
-    except Exception as e:
-        logger.error(f"Erreur lors de l'exécution: {str(e)}")
-        raise

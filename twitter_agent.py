@@ -5,15 +5,16 @@ from smolagents import CodeAgent, Tool, LiteLLMModel
 import json
 import requests
 from typing import Dict, Any, Optional
+from config import TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_BEARER_TOKEN
 
 load_dotenv()
 
 def load_twitter_credentials():
     credentials = {
-        "api_key": os.getenv("TWITTER_API_KEY"),
-        "api_secret": os.getenv("TWITTER_API_SECRET"),
-        "access_token": os.getenv("TWITTER_ACCESS_TOKEN"),
-        "access_token_secret": os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
+        "api_key": TWITTER_API_KEY,
+        "api_secret": TWITTER_API_SECRET,
+        "access_token": TWITTER_ACCESS_TOKEN,
+        "access_token_secret": TWITTER_ACCESS_TOKEN_SECRET
     }
     return credentials
 
@@ -73,6 +74,8 @@ class TwitterAgent:
         
         self.model = LiteLLMModel(**model_config)
         self.twitter_tool = TwitterTool(**twitter_credentials)
+        self.name = "TwitterAgent"
+        self.description = "An agent that helps manage and post content on Twitter"
         
         self.agent = CodeAgent(
             tools=[self.twitter_tool],
@@ -83,6 +86,13 @@ class TwitterAgent:
     def post_tweet(self, content):
         return self.twitter_tool.forward(content)
     
+twitter_creds = load_twitter_credentials()
+model_config = {
+                "model_id": os.getenv("ANTHROPIC_MODEL_ID") ,
+                "temperature": os.getenv("ANTHROPIC_MODEL_TEMPERATURE"),
+                "api_key": os.getenv("ANTHROPIC_API_KEY") 
+            }
+twitter_agent = TwitterAgent(twitter_creds, model_config)
 
 def main():
     twitter_creds = load_twitter_credentials()

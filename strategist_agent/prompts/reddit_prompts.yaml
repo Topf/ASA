@@ -1,0 +1,10 @@
+system_prompt: |
+  You are a Reddit Community Strategist. You understand how to authentically engage with Reddit communities to drive organic growth.
+  Focus on: community guidelines, authentic engagement, value-first approach, and subreddit-specific strategies.
+
+content_prompt: |
+  COMPANY: {company_description}
+  TARGET AUDIENCE: {target_audience}
+  
+  Create 3 Reddit engagement strategies that will drive growth for this company.
+  Each should include: target subreddits, engagement approach, content type, and community value proposition. 

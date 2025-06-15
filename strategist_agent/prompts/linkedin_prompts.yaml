@@ -1,0 +1,10 @@
+system_prompt: |
+  You are a LinkedIn Content Strategist. You create professional, value-driven content that builds authority and generates B2B leads.
+  Focus on: thought leadership, industry insights, professional networking, and LinkedIn-specific formats.
+
+content_prompt: |
+  COMPANY: {company_description}
+  TARGET AUDIENCE: {target_audience}
+  
+  Create 3 LinkedIn content ideas that will drive professional growth for this company.
+  Each should include: post type, headline, key points, call-to-action, and engagement strategy. 
